@@ -1,0 +1,466 @@
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --ink: #2b1d14;
+    --speck: #7a5230;
+    --peel: #f2c94c;
+    --flour: #f4f2ea;
+    --stem: #8a9a5b;
+    --bg: #e9e4d6;
+
+    --card-width: min(88vw, 390px);
+    --card-height: 650px;
+
+    --transition: 650ms cubic-bezier(.22, .8, .25, 1);
+}
+
+.body {
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+    padding: 40px 20px;
+
+    background:
+        radial-gradient(circle at 20% 20%, rgba(122,82,48,.08) 0 2px, transparent 3px),
+        radial-gradient(circle at 80% 70%, rgba(122,82,48,.07) 0 2px, transparent 3px),
+        var(--bg);
+
+    background-size: 32px 32px;
+
+    color: var(--ink);
+    font-family: Georgia, serif;
+
+    padding: 40px 20px;
+}
+
+
+input[type="radio"][name="cards"] {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.deck {
+    width: var(--card-width);
+    position: relative;
+    margin-inline: auto;
+}
+
+.deck-title {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.deck-title-span {
+    display: block;
+    color: var(--stem);
+    font-family: Arial, sans-serif;
+    font-size: 11px;
+    font-weight: bold;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+}
+
+.deck-title-h1 {
+    font-size: clamp(28px, 7vw, 42px);
+    line-height: .95;
+}
+
+
+/* =========================
+   CARD STAGE
+========================= */
+
+.card-stage {
+    width: var(--card-width);
+    height: var(--card-height);
+    position: relative;
+    overflow: hidden;
+}
+
+
+/* =========================
+   INDV. CARDS
+========================= */
+
+.card {
+    width: 100%;
+    height: 100%;
+
+    position: absolute;
+    inset: 0;
+
+    background: var(--flour);
+    border: 1px solid rgba(43,29,20,.15);
+    border-radius: 24px;
+
+    overflow: hidden;
+
+    transform: translateX(120%) rotate(8deg);
+    opacity: 0;
+
+    transition:
+        transform var(--transition),
+        opacity var(--transition);
+
+    display: flex;
+    flex-direction: column;
+}
+
+
+/* =========================
+   IMAGES
+========================= */
+
+.card-image {
+    height: 47%;
+
+    position: relative;
+    overflow: none;
+
+    background:
+        linear-gradient(
+            rgba(242,201,76,.5),
+            rgba(138,154,91,.35)
+        );
+}
+
+.card-image.cake {
+    background:
+        linear-gradient(
+            rgba(43,29,20,.08),
+            rgba(43,29,20,.08)
+        ),
+        url("images!/IMG_4189.jpg")
+        center / cover;
+}
+
+.card-image.cookies {
+    background:
+        linear-gradient(
+            rgba(43,29,20,.08),
+            rgba(43,29,20,.08)
+        ),
+        url("images!/IMG_4190.jpg")
+        center / cover;
+}
+
+.card-image.bread {
+    background:
+        linear-gradient(
+            rgba(43,29,20,.08),
+            rgba(43,29,20,.08)
+        ),
+        url("images!/IMG_6759.jpg")
+        center / cover;
+}
+
+
+/* =========================
+   IMAGE LABEL
+========================= */
+
+.recipe-number {
+    position: absolute;
+    top: 18px;
+    left: 18px;
+
+    width: 42px;
+    height: 42px;
+
+    border-radius: 50%;
+    background: var(--flour);
+
+    display: grid;
+    place-items: center;
+
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+
+    box-shadow: 0 5px 15px rgba(0,0,0,.15);
+}
+
+
+/* =========================
+   CARD CONTENT
+========================= */
+
+.card-content {
+    flex: 1;
+
+    padding: 25px 26px 22px;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.category {
+    color: var(--stem);
+
+    font-family: Arial, sans-serif;
+    font-size: 10px;
+    font-weight: bold;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+
+    margin-bottom: 7px;
+}
+
+.card-h2 {
+    font-size: clamp(28px, 7vw, 38px);
+    line-height: .95;
+    width: 100%;
+    text-align: center;
+    word-break: normal;
+    overflow-wrap: normal;
+
+    margin-bottom: 7px;
+}
+
+.description {
+    color: #634b3b;
+    font-size: 13px;
+    line-height: 1.45;
+
+    margin-bottom: 18px;
+}
+
+
+/* =========================
+   RECIPE META
+========================= */
+
+.recipe-meta {
+    display: flex;
+    gap: 8px;
+
+    margin-bottom: 16px;
+}
+
+.meta {
+    flex: 1;
+
+    border-top: 1px solid rgba(43,29,20,.2);
+    padding-top: 7px;
+
+    font-family: Arial, sans-serif;
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+}
+
+.meta-strong {
+    display: block;
+
+    font-family: Georgia, serif;
+    font-size: 15px;
+    letter-spacing: 0;
+    text-transform: none;
+
+    margin-top: 3px;
+}
+
+
+/* =========================
+   INGREDIENTS
+========================= */
+
+.ingredients {
+    border-top: 1px solid rgba(43,29,20,.18);
+    padding-top: 13px;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px 16px;
+
+    font-size: 12px;
+    line-height: 1.25;
+}
+
+.ingredients-title {
+    grid-column: 1 / -1;
+
+    font-family: Arial, sans-serif;
+    font-size: 9px;
+    font-weight: bold;
+    letter-spacing: .15em;
+    text-transform: uppercase;
+
+    color: var(--speck);
+    margin-bottom: 2px;
+}
+
+.ingredients-li {
+    list-style: none;
+}
+
+.ingredients-li:not(.ingredients-title)::before {
+    content: "â€¢";
+    color: var(--peel);
+    margin-right: 6px;
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+.card-footer {
+    margin-top: auto;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding-top: 15px;
+}
+
+.tag {
+    color: var(--speck);
+
+    font-family: Arial, sans-serif;
+    font-size: 9px;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+}
+
+
+/* =========================
+   CAROUSEL STATES
+========================= */
+
+/* Card 1 */
+
+#card-1:checked ~ .card-stage .card-1 {
+    transform: translateX(0) rotate(0);
+    opacity: 1;
+    z-index: 3;
+}
+
+/* Card 2 */
+
+#card-2:checked ~ .card-stage .card-2 {
+    transform: translateX(0) rotate(0);
+    opacity: 1;
+    z-index: 3;
+}
+
+/* Card 3 */
+
+#card-3:checked ~ .card-stage .card-3 {
+    transform: translateX(0) rotate(0);
+    opacity: 1;
+    z-index: 3;
+}
+
+
+/* =========================
+   PREV/NEXT MOVEMENT
+========================= */
+
+/* Card 1 selected */
+
+#card-1:checked ~ .card-stage .card-2,
+#card-1:checked ~ .card-stage .card-3 {
+    transform: translateX(120%) rotate(8deg);
+    opacity: 0;
+}
+
+/* Card 2 selected */
+
+#card-2:checked ~ .card-stage .card-1 {
+    transform: translateX(-120%) rotate(-8deg);
+    opacity: 0;
+}
+
+#card-2:checked ~ .card-stage .card-3 {
+    transform: translateX(120%) rotate(8deg);
+    opacity: 0;
+}
+
+/* Card 3 selected */
+
+#card-3:checked ~ .card-stage .card-1,
+#card-3:checked ~ .card-stage .card-2 {
+    transform: translateX(-120%) rotate(-8deg);
+    opacity: 0;
+}
+
+
+/* =========================
+   ARROW BUTTONS
+========================= */
+
+.controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.controls .arrow {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--ink);
+    color: var(--flour);
+    display: none;
+    place-items: center;
+    cursor: pointer;
+    font-family: Arial, sans-serif;
+    font-size: 18px;
+    transition: transform .2s ease, background .2s ease;
+    user-select: none;
+}
+
+.controls .arrow:hover {
+    background: var(--stem);
+    transform: translateY(-3px);
+}
+
+.controls .arrow:active { transform: scale(.92); }
+
+/* Card 1:*/
+#card-1:checked ~ .controls .prev-1,
+#card-1:checked ~ .controls .next-1,
+
+/* Card 2:*/
+#card-2:checked ~ .controls .prev-2,
+#card-2:checked ~ .controls .next-2,
+
+/* Card 3:*/
+#card-3:checked ~ .controls .prev-3,
+#card-3:checked ~ .controls .next-3 {
+    display: grid;
+}
+
+/* =========================
+   MOBILE DISPLAY
+========================= */
+
+@media (max-width: 480px) {
+
+    :root {
+        --card-height: 620px;
+    }
+
+    .body {
+        padding: 25px 15px;
+    }
+
+    .card-content {
+        padding: 21px;
+    }
+
+    .ingredients {
+        font-size: 11px;
+    }
+}
